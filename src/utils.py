@@ -3,8 +3,10 @@ import pandas as pd
 
 def load_data(csv_path):
     df = pd.read_csv(csv_path)
+    # Map labels to 0/1
+    df['Label'] = df['Label'].map({'bad': 0, 'good': 1})
     X = df.iloc[:, :2].values.astype(float)
-    Y = df.iloc[:, 2].values.reshape(-1,1).astype(float)
+    Y = df.iloc[:, 2].values.reshape(-1,1).astype(np.float32)
     return X, Y
 
 def zscore_normalize(X, mean=None, std=None):
@@ -14,3 +16,4 @@ def zscore_normalize(X, mean=None, std=None):
         std = X.std(axis=0)
     X_norm = (X - mean) / std
     return X_norm, mean, std
+
