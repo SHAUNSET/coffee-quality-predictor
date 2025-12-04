@@ -1,46 +1,147 @@
-Coffee Roasting Quality Predictor
-Predict whether a coffee batch will be Good or Bad based on roasting temperature and duration.
 
-Features
-•	☕ Simple, intuitive Streamlit UI.
-•	⚡ Powered by a TensorFlow neural network.
-•	📊 Real-time predictions with probability scores.
-•	🛠️ Includes data normalization and trained model for immediate use.
+# ☕ Coffee Quality Predictor  
 
-Why this project?
-Coffee roasting is an art and a science. This project helps predict coffee batch quality, combining machine learning and practical roasting parameters to give you consistent results.
-Getting Started
+##  Overview
 
-Requirements
-•	Python 3.10+
-•	Packages:
- 	pip install -r requirements.txt
+This project uses a TensorFlow neural network to predict whether a roasted coffee batch will be **Good** or **Bad** based on:
+- Roast Temperature (°C)
+- Roast Duration (minutes)
+
+It includes:
+- A clean Streamlit UI
+- A saved ML model
+- Tools for training, testing, and deploying predictions
+- Full reproducibility: model + normalization saved
 
 
-Folder Structure
-coffee-roasting/
+##  Project Structure
+
+```bash
+coffee-quality-predictor/
+├── app.py # Streamlit app (main UI)
+├── check_csv.py # CSV validation helper
+├── train.py # Basic training script
+├── train_and_save_tf_stable.py # Stable training + model saving
 │
-├─ data/                   # CSV datasets
-├─ models/                 # Saved TensorFlow model
-├─ src/
-│  ├─ model_tf.py          # TensorFlow model class
-│  └─ utils.py             # Data loading & normalization
-├─ results/                # Training loss plots
-├─ app.py                  # Streamlit UI
-└─ train_and_save_tf_stable.py # Training script
+├── models/ # Saved models + normalization
+│ └── model files...
+│
+├── data/ # Training data CSV files
+│ └── datasets...
+│
+├── requirements.txt
+└── README.md
+```
 
-Usage
-1.	Launch the Streamlit app:
- 	streamlit run app.py
-2.	Enter Temperature (°C) and Duration (minutes).
-3.	Get the prediction: Good ✅ or Bad ❌, with probability score.
+## Installation
 
-Training Your Own Model
-python train_and_save_tf_stable.py
-•	Trains the neural network on simulated_coffee_data.csv.
-•	Saves trained model in models/tf_coffee_model.keras.
-•	Normalization stats saved in models/normalization.npz.
+ Clone the repository
 
-Results
-•	Loss curve: results/training_loss.png.
-•	Training accuracy and classification metrics displayed after training.
+```bash
+git clone https://github.com/SHAUNSET/coffee-quality-predictor
+cd coffee-quality-predictor
+pip install -r requirements.txt
+```
+
+ Run the App
+
+```bash
+streamlit run app.py
+```
+
+
+
+##  Prediction Workflow 
+
+- User enters temperature + duration
+- Data gets normalized using saved mean & std
+- TensorFlow model predicts probability
+- App outputs:
+        - Good (✓)
+        - Bad (✗)
+
+- Probability score
+
+
+## Used By
+
+This project is used by the following companies:
+
+- Coffee roasters wanting a quick check on batch quality before  roasting.
+
+- Hobbyists experimenting with roast temperature and time.
+
+- Data scientists or learners — a reference project to understand ML-based classification with real-world data.
+
+
+## Screenshots
+
+<img src="screenshots/Screenshot (140).png" width="600"/>
+
+
+## Tech Stack
+
+- Python 3.10+
+- TensorFlow / Keras
+- NumPy
+- Streamlit
+- Pandas
+
+
+## Features
+
+- **Interactive Web App (Streamlit)**  
+  Clean sliders + inputs for instant predictions.
+
+- **Simple & Reproducible Training Pipeline**  
+  Includes preprocessing, normalization, model training, and saving.
+
+- **TensorFlow Neural Network Model**  
+  Fast binary classifier optimized for roast quality prediction.
+
+- **Persistent Model Storage**  
+  Model + preprocessing statistics saved for stable deployment.
+
+- **Beginner-Friendly Code Structure**  
+  Easy to read, modify, and extend—ideal for ML learners.
+
+- **Automatic Quality Classification**  
+  Predicts:
+  - “Good Coffee”
+  - “Bad Coffee”
+
+## Lessons Learned
+
+- **Understanding the ML workflow end-to-end**
+  From raw dataset → preprocessing → model building → evaluation → deployment.
+
+- **Feature engineering matters**
+  Certain roast properties (like moisture, density, color values) had stronger influence on quality than expected.
+
+- **Importance of model persistence**
+  Learned how to save and load ML models with `joblib` so Streamlit doesn’t retrain every time.
+
+- **Handling real-world numeric data**
+  Scaling and normalization significantly improved model performance.
+
+- **Building a deployable ML app**
+  Learned how to convert a standalone ML model into a clean, interactive web interface using Streamlit.
+
+- **Testing multiple models**
+  Found that tree-based models performed better for this dataset compared to linear models.
+
+- **Clean code structure makes apps easier**
+  Splitting training code and UI code improved readability and debugging.
+
+
+## Contributing
+
+Contributions are always welcome!
+Feel free to open an issue or send a pull request.
+
+
+
+## License
+
+This project is licensed under the MIT License.
+
